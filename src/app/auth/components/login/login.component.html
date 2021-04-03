@@ -3,13 +3,34 @@
     <h5 class="card-title text-center">Login</h5>
     <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="form-label-group">
-        <label for="inputUserame">Username</label>
-        <input type="text" formControlName="username" id="username" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Username" required autofocus>
-        
+        <label for="username">username</label>
+        <input
+          type="text" name="username" id="username" [formControl]="username" class="form-control shadow p-3 mb-5 bg-body rounded"placeholder="Username">
+    
+        <div [hidden]="username.valid || username.untouched">
+          <div>
+            The following problems have been found with the username:
+          </div>
+    
+          <div [hidden]="!username.hasError('minlength')">
+            Username can not be shorter than 3 characters.
+          </div>
+          <div [hidden]="!username.hasError('required')">
+            Username is required.
+          </div>
+        </div>
       </div>
       <div class="form-label-group">
         <label for="inputPassword">Password</label>
-        <input type="password" formControlName="password" id="password" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Password" required>
+        <input type="password" name="password" [formControl]="password" id="password" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Password">
+        <div [hidden]="password.valid || password.untouched">
+          <div>
+            The following problems have been found with the password:
+          </div>
+          <div [hidden]="!password.hasError('minlength')">
+            password can not be shorter than 8 characters.
+          </div>
+        </div>
       </div>
       <hr class="my-4">
       <button type="submit" class="btn btn-lg btn-primary btn-block text-uppercase">Login</button>

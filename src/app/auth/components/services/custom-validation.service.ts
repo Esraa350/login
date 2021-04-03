@@ -1,3 +1,4 @@
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -5,5 +6,13 @@ import { Injectable } from '@angular/core';
 })
 export class CustomValidationService {
 
-  constructor() { }
+  constructor(private client:HttpClient){console.log('service') }
+  readonly baseURL:string="http://";
+  getUser(){
+    //fetch userLogin
+    this.client.get
+  }
+  setUser(){
+    //register
+  }
 }

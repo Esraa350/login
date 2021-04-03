@@ -4,24 +4,54 @@
     <form class="form-signin" [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <div class="form-label-group">
         <label for="inputUserame">Username</label>
-        <input type="text" formControlName="username" id="username" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Username" required autofocus>
-        
+        <input type="text" name="username" id="username" [formControl]="username" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Username">
+        <div [hidden]="username.valid || username.untouched">
+          <div>
+            The following problems have been found with the username:
+          </div>
+    
+          <div [hidden]="!username.hasError('minlength')">
+            Username can not be shorter than 3 characters.
+          </div>
+          <div [hidden]="!username.hasError('required')">
+            Username is required.
+          </div>
+        </div>
       </div>
 
       <div class="form-label-group">
         <label for="inputEmail">Email address</label>
-        <input type="email" formControlName="email"  id="email" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Email address" required>
-       
+        <input type="email" name="email" [formControl]="email"id="email" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Email address">
+        <div [hidden]="email.valid || email.untouched">
+          <div>
+            The following problems have been found with the Email:
+          </div>
+    
+          <div [hidden]="!email.hasError('minlength')">
+            Email can not be shorter than 3 characters.
+          </div>
+          <div [hidden]="!email.hasError('pattern')">
+            Email is invalid.
+          </div>
+        </div>
       </div>
       
       <hr>
 
       <div class="form-label-group">
         <label for="inputPassword">Password</label>
-        <input type="password" formControlName="password"  id="password" class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Password" required>
+        <input type="password" name="password" [formControl]="password" id="password"class="form-control shadow p-3 mb-5 bg-body rounded" placeholder="Password" required>
+        <div [hidden]="password.valid || password.untouched">
+          <div>
+            The following problems have been found with the password:
+          </div>
+          <div [hidden]="!password.hasError('minlength')">
+            password can not be shorter than 8 characters.
+          </div>
+        </div>
       </div>
       
-      <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+      <button  [disabled]="!userForm.valid"class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
       <a class="d-block text-center mt-2 small" href="#">Sign In</a>
       <hr class="my-4">
       <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fa fa-google"></i> Sign up with Google</button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,Validators } from '@angular/forms';
+import {  Validators, FormBuilder, FormControl ,FormGroup} from '@angular/forms';
 import {CustomValidationService} from '../services/custom-validation.service';
 @Component({
   selector: 'app-login',
@@ -8,16 +8,16 @@ import {CustomValidationService} from '../services/custom-validation.service';
 })
 //email validator//note
 export class LoginComponent implements OnInit {
-  userForm=this.fb.group({
-    username:["",[Validators.required,Validators.minLength(3)]],
-    password:["",[Validators.required,Validators.minLength(8)]]
-  })
-    
-  constructor(private fb:FormBuilder,
-    private customValid:CustomValidationService) {}
-  
-   ngOnInit(){
+  username = new FormControl('', [Validators.required,Validators.minLength(3)]);
+  password = new FormControl('', [Validators.required,Validators.minLength(8)]);
 
+  userForm: FormGroup = this.builder.group({
+    username: this.username,
+    password: this.password
+  });
+
+  constructor(private builder: FormBuilder) { }
+   ngOnInit(){
    }
    sendDataLogin(){
 
